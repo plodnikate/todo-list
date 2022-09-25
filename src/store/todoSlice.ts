@@ -36,9 +36,15 @@ const todoSlice = createSlice({
                 expirationDate: action.payload.expirationDate,
             });
         },
+        toggleComplete(state, action: PayloadAction<string>) {
+            const toggledTodo = state.list.find(todo => todo.id === action.payload);
+            if (toggledTodo) {
+                toggledTodo.completed = !toggledTodo.completed;
+            }
+        }
     },
 });
 
 
-export const { addTodo } = todoSlice.actions;
+export const { addTodo, toggleComplete } = todoSlice.actions;
 export default todoSlice.reducer;
