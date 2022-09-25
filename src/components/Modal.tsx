@@ -18,8 +18,6 @@ interface Modal {
     setTitle: (title:string) => void;
 }
 
-
-
 const Modal: React.FC<Modal> = ({ closeModal, title, setTitle }) => {
     const dispatch = useAppDispatch();
 

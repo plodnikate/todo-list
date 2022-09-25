@@ -9,7 +9,6 @@ import { DATE_FORMAT } from '../constants';
 import '../style.css'
 
 const NewTodoForm: React.FC = () => {
-
     const [text, setText] = useState('');
     const [showModal, setShowModal] = useState(false);
     const dispatch = useAppDispatch();
