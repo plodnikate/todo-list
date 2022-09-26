@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useAppDispatch } from '../hooks';
 import { format, addDays } from 'date-fns';
-import { addTodo } from '../store/todoSlice';
+import { addTodo, editTodo } from '../store/todoSlice';
 
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -15,24 +15,34 @@ import { DATE_FORMAT, FORM_DATE_FORMAT } from '../constants';
 interface Modal {
     closeModal: () => void;
     title: string;
-    setTitle: (title:string) => void;
+    setTitle?: (title: string) => void;
+    id?:string;
+    creationDate?: Date,
+    expirationDate?: Date,
 }
 
-const Modal: React.FC<Modal> = ({ closeModal, title, setTitle }) => {
+const Modal: React.FC<Modal> = ({ closeModal, title, setTitle, id, creationDate, expirationDate }) => {
     const dispatch = useAppDispatch();
 
     const [text, setText] = useState(title);
-    const [dateCreation, setDateCreation] = useState(new Date());
-    const [dateExpiration, setDateExpiration] = useState(addDays(dateCreation, 1));
+    const [dateCreation, setDateCreation] = useState(creationDate ? creationDate : new Date());
+    const [dateExpiration, setDateExpiration] = useState(expirationDate ? expirationDate : addDays(dateCreation, 1));
 
     const minExpirationDate = format(addDays(dateCreation, 1), FORM_DATE_FORMAT);
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
         if (text.trim().length) {
+            if(id){
+                dispatch(editTodo({ id: id, title: text, creationDate: format(dateCreation, DATE_FORMAT), expirationDate: format(dateExpiration, DATE_FORMAT) }))
+                closeModal();
+                return;
+            }
             dispatch(addTodo({ title: text, creationDate: format(dateCreation, DATE_FORMAT), expirationDate: format(dateExpiration, DATE_FORMAT) }));
             setText('');
-            setTitle('');
+            if (setTitle) {
+                setTitle('')
+            }
             closeModal();
         }
     };
@@ -48,21 +58,23 @@ const Modal: React.FC<Modal> = ({ closeModal, title, setTitle }) => {
                                 placeholder='new todo' value={text} fullWidth
                                 onChange={(e) => setText(e.target.value)}
                             />
-                                <TextField
-                                    required fullWidth
-                                    id="datetime-local"
-                                    label="Creation Date"
-                                    type="datetime-local"
-                                    InputLabelProps={{
-                                        shrink: true,
-                                    }}
-                                    onChange={(event) => { setDateCreation(new Date(event.target.value));}}
-                                />
+                            <TextField
+                                required fullWidth
+                                id="datetime-local"
+                                label="Creation Date"
+                                type="datetime-local"
+                                defaultValue={creationDate ? format(creationDate, FORM_DATE_FORMAT) : ''}
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                                onChange={(event) => { setDateCreation(new Date(event.target.value)); }}
+                            />
                             <TextField
                                 required fullWidth
                                 id="datetime-local"
                                 label="Expiration Date"
                                 type="datetime-local"
+                                defaultValue={expirationDate ? format(expirationDate, FORM_DATE_FORMAT) : ''}
                                 InputLabelProps={{
                                     shrink: true,
                                 }}
