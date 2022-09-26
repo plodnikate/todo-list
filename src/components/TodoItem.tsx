@@ -1,7 +1,7 @@
 import { useAppDispatch } from '../hooks';
 import { toggleComplete } from '../store/todoSlice';
 import { ListItem, Checkbox, ListItemText } from '@material-ui/core';
-import DeleteOutlined from '@material-ui/icons/DeleteOutlined';
+import { FC } from 'react';
 
 interface TodoItemProps {
     id: string,
@@ -11,7 +11,7 @@ interface TodoItemProps {
     expirationDate: string,
 }
 
-const TodoItem: React.FC<TodoItemProps> = ({ id, title, completed, creationDate, expirationDate }) => {
+const TodoItem: FC<TodoItemProps> = ({ id, title, completed, creationDate, expirationDate }) => {
     const dispatch = useAppDispatch();
 
     return (

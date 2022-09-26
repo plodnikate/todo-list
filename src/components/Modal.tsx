@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, FC, SyntheticEvent } from 'react';
 import { useAppDispatch } from '../hooks';
-import { format, addDays } from 'date-fns';
+import { format, addMinutes } from 'date-fns';
 import { addTodo } from '../store/todoSlice';
 
 import Button from '@mui/material/Button';
@@ -13,27 +13,27 @@ import { Grid } from '@material-ui/core';
 import { DATE_FORMAT, FORM_DATE_FORMAT } from '../constants';
 
 interface Modal {
-    closeModal: () => void;
+    showModal: (isShowModule:boolean) => void;
     title: string;
     setTitle: (title:string) => void;
 }
 
-const Modal: React.FC<Modal> = ({ closeModal, title, setTitle }) => {
+const Modal: FC<Modal> = ({ showModal, title, setTitle }) => {
     const dispatch = useAppDispatch();
 
     const [text, setText] = useState(title);
     const [dateCreation, setDateCreation] = useState(new Date());
-    const [dateExpiration, setDateExpiration] = useState(addDays(dateCreation, 1));
+    const [dateExpiration, setDateExpiration] = useState(addMinutes(dateCreation, 5));
 
-    const minExpirationDate = format(addDays(dateCreation, 1), FORM_DATE_FORMAT);
+    const minExpirationDate = format(addMinutes(dateCreation, 5), FORM_DATE_FORMAT);
 
-    const handleSubmit = (e: any) => {
+    const handleSubmit = (e: SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (text.trim().length) {
+        if (text.trim()) {
             dispatch(addTodo({ title: text, creationDate: format(dateCreation, DATE_FORMAT), expirationDate: format(dateExpiration, DATE_FORMAT) }));
             setText('');
             setTitle('');
-            closeModal();
+            showModal(false);
         }
     };
 
@@ -56,7 +56,7 @@ const Modal: React.FC<Modal> = ({ closeModal, title, setTitle }) => {
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
-                                    onChange={(event) => { setDateCreation(new Date(event.target.value));}}
+                                    onChange={(event) => { setDateCreation(new Date(event.target.value)) }}
                                 />
                             <TextField
                                 required fullWidth
@@ -74,7 +74,7 @@ const Modal: React.FC<Modal> = ({ closeModal, title, setTitle }) => {
                         </Stack>
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={closeModal}>Cancel</Button>
+                        <Button onClick={() => { showModal(false) }}>Cancel</Button>
                         <Button type="submit">Save</Button>
                     </DialogActions>
                 </Stack>

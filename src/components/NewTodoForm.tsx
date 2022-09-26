@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, FC } from 'react';
 import { useAppDispatch } from '../hooks';
 import { format, addDays } from 'date-fns';
 import { addTodo } from '../store/todoSlice';
@@ -8,17 +8,14 @@ import Modal from './Modal';
 import { DATE_FORMAT } from '../constants';
 import '../style.css'
 
-const NewTodoForm: React.FC = () => {
+const NewTodoForm: FC = () => {
     const [text, setText] = useState('');
     const [showModal, setShowModal] = useState(false);
     const dispatch = useAppDispatch();
 
-    const handleCloseModule = () => {
-        setShowModal(false)
-    }
 
     const handleKeyPress = () => {
-        if (text.trim().length) {
+        if (text.trim()) {
             const date = new Date();
             dispatch(addTodo({ title: text, creationDate: format(date, DATE_FORMAT), expirationDate: format(addDays(date, 1), DATE_FORMAT) }));
             setText('');
@@ -51,7 +48,7 @@ const NewTodoForm: React.FC = () => {
                             </Button>
                         </Grid>
                     </Grid>
-                    {showModal && <Modal closeModal={handleCloseModule} title={text} setTitle={setText} />}
+                    {showModal && <Modal showModal={setShowModal} title={text} setTitle={setText} />}
                 </Paper>
             </Grid>
         </Grid>
