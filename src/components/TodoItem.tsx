@@ -36,7 +36,7 @@ const TodoItem: React.FC<TodoItemProps> = ({ id, title, completed, creationDate,
                         }
                     }}
                     primary={title}
-                    secondary={`${creationDate} - ${expirationDate}`} className={completed ? "done_item" : "" + "text"}
+                    secondary={`${creationDate} - ${expirationDate}`} className={(completed ? "done_item " : "") + "text"}
                 />
                 <ListItemSecondaryAction>
                     <IconButton aria-label="Delete Todo" onClick={() => setShowModal(true)}>
