@@ -8,3 +8,7 @@
 .list_paper{
     margin:16px;
 }
+.done_item{
+    text-decoration:line-through;
+    color:#808080
+}

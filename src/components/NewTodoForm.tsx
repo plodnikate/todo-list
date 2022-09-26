@@ -12,9 +12,16 @@ const NewTodoForm: FC = () => {
     const [text, setText] = useState('');
     const [showModal, setShowModal] = useState(false);
     const dispatch = useAppDispatch();
+    const [error, setError] = useState("");
 
 
     const handleKeyPress = () => {
+        if (!text.match(/[@#~^`!-+()_|?{}[\]&*%<>\\$'"]/)) {
+            setError("");
+        } else {
+            setError("no special symbols allowed");
+            return;
+        }
         if (text.trim()) {
             const date = new Date();
             dispatch(addTodo({ title: text, creationDate: format(date, DATE_FORMAT), expirationDate: format(addDays(date, 1), DATE_FORMAT) }));
@@ -29,6 +36,8 @@ const NewTodoForm: FC = () => {
                     <Grid container>
                         <Grid xs={9} md={10} item className="grid">
                             <TextField
+                                helperText={error} // error message
+                                error={!!error}
                                 placeholder='new todo' value={text} fullWidth
                                 onChange={(e) => setText(e.target.value)}
                                 onKeyPress={event => {
