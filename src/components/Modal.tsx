@@ -1,4 +1,4 @@
-import { useState, FC } from 'react';
+import { useState, FC, SyntheticEvent } from 'react';
 import { useAppDispatch } from '../hooks';
 import { format, addMinutes } from 'date-fns';
 import { addTodo } from '../store/todoSlice';
@@ -27,7 +27,7 @@ const Modal: FC<Modal> = ({ showModal, title, setTitle }) => {
 
     const minExpirationDate = format(addMinutes(dateCreation, 5), FORM_DATE_FORMAT);
 
-    const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
+    const handleSubmit = (e: SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (text.trim()) {
             dispatch(addTodo({ title: text, creationDate: format(dateCreation, DATE_FORMAT), expirationDate: format(dateExpiration, DATE_FORMAT) }));

@@ -31,10 +31,10 @@ const todoSlice = createSlice({
             const {title, creationDate, expirationDate} = action.payload;
             state.list.push({
                 id: uuidv4(),
-                title: title,
+                title,
                 completed: false,
-                creationDate: creationDate,
-                expirationDate: expirationDate,
+                creationDate,
+                expirationDate,
             });
         },
     },
