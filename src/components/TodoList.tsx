@@ -7,7 +7,7 @@ const TodoList = () => {
 
     return (
         <Grid container justifyContent="center" >
-            {todos.length > 0 && <Grid xs={12} sm={9} md={6} item >
+            {todos.length !=0 && <Grid xs={12} sm={9} md={6} item >
                 <Paper className='list_paper'>
                     <List style={{ overflow: 'scroll' }}>
                         {todos.map((todo) => (

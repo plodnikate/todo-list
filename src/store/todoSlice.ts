@@ -28,12 +28,13 @@ const todoSlice = createSlice({
     initialState,
     reducers: {
         addTodo(state, action: PayloadAction<addTodoAction>) {
+            const {title, creationDate, expirationDate} = action.payload;
             state.list.push({
                 id: uuidv4(),
-                title: action.payload.title,
+                title: title,
                 completed: false,
-                creationDate: action.payload.creationDate,
-                expirationDate: action.payload.expirationDate,
+                creationDate: creationDate,
+                expirationDate: expirationDate,
             });
         },
     },

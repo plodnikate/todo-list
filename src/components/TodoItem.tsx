@@ -1,4 +1,5 @@
 import { ListItem, ListItemText } from '@material-ui/core';
+import { FC } from 'react';
 
 interface TodoItemProps {
     id: string,
@@ -8,7 +9,7 @@ interface TodoItemProps {
     expirationDate: string,
 }
 
-const TodoItem: React.FC<TodoItemProps> = ({ title, creationDate, expirationDate }) => {
+const TodoItem: FC<TodoItemProps> = ({ title, creationDate, expirationDate }) => {
 
     return (
         <ListItem divider>
