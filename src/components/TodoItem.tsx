@@ -1,6 +1,7 @@
 import { useAppDispatch } from '../hooks';
-import { toggleComplete } from '../store/todoSlice';
-import { ListItem, Checkbox, ListItemText } from '@material-ui/core';
+import { toggleComplete, removeTodo } from '../store/todoSlice';
+import { ListItem, Checkbox, IconButton, ListItemText, ListItemSecondaryAction } from '@material-ui/core';
+import DeleteOutlined from '@material-ui/icons/DeleteOutlined';
 import { FC } from 'react';
 
 interface TodoItemProps {
@@ -20,7 +21,12 @@ const TodoItem: FC<TodoItemProps> = ({ id, title, completed, creationDate, expir
                 checked={completed}
                 onChange={() => dispatch(toggleComplete(id))}
             />
-            <ListItemText primary= {title} secondary={`${creationDate} - ${expirationDate}`} className={completed ? "done_item" : ""}/>
+            <ListItemText primary={title} secondary={`${creationDate} - ${expirationDate}`} className={completed ? "done_item" : ""}/>
+            <ListItemSecondaryAction>
+            <IconButton aria-label="Delete Todo" onClick={() => dispatch(removeTodo(id))}>
+                <DeleteOutlined />
+            </IconButton>
+            </ListItemSecondaryAction>
         </ListItem>
     );
 };
