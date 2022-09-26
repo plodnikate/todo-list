@@ -1,8 +1,12 @@
-import React from 'react';
+import NewTodoForm from './components/NewTodoForm';
+import TodoList from './components/TodoList';
 
 function App() {
   return (
-    <div></div>
+    <div className='App'>
+      <NewTodoForm />
+      <TodoList />
+    </div>
   );
 }
 
