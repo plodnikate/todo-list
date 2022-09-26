@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, FC } from 'react';
 import { useAppDispatch } from '../hooks';
 import { format, addDays } from 'date-fns';
 import { addTodo } from '../store/todoSlice';
@@ -8,17 +8,21 @@ import Modal from './Modal';
 import { DATE_FORMAT } from '../constants';
 import '../style.css'
 
-const NewTodoForm: React.FC = () => {
+const NewTodoForm: FC = () => {
     const [text, setText] = useState('');
     const [showModal, setShowModal] = useState(false);
     const dispatch = useAppDispatch();
+    const [error, setError] = useState("");
 
-    const handleCloseModule = () => {
-        setShowModal(false)
-    }
 
     const handleKeyPress = () => {
-        if (text.trim().length) {
+        if (!text.match(/[@#~^`!-+()_|?{}[\]&*%<>\\$'"]/)) {
+            setError("");
+        } else {
+            setError("no special symbols allowed");
+            return;
+        }
+        if (text.trim()) {
             const date = new Date();
             dispatch(addTodo({ title: text, creationDate: format(date, DATE_FORMAT), expirationDate: format(addDays(date, 1), DATE_FORMAT) }));
             setText('');
@@ -32,6 +36,8 @@ const NewTodoForm: React.FC = () => {
                     <Grid container>
                         <Grid xs={9} md={10} item className="grid">
                             <TextField
+                                helperText={error} // error message
+                                error={!!error}
                                 placeholder='new todo' value={text} fullWidth
                                 onChange={(e) => setText(e.target.value)}
                                 onKeyPress={event => {
@@ -51,7 +57,7 @@ const NewTodoForm: React.FC = () => {
                             </Button>
                         </Grid>
                     </Grid>
-                    {showModal && <Modal closeModal={handleCloseModule} title={text} setTitle={setText} />}
+                    {showModal && <Modal showModal={setShowModal} title={text} setTitle={setText} />}
                 </Paper>
             </Grid>
         </Grid>
