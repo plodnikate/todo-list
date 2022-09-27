@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { v4 as uuidv4 } from "uuid";
-import { SelectAll } from '../constants'
+import { SELECTED_ALL } from '../constants'
 
 type Todo = {
     id: string;
@@ -30,7 +30,7 @@ type TodosState = {
 
 const initialState: TodosState = {
     list: [],
-    selectedTab: SelectAll
+    selectedTab: SELECTED_ALL
 }
 
 const todoSlice = createSlice({
@@ -46,7 +46,7 @@ const todoSlice = createSlice({
                 creationDate,
                 expirationDate,
             });
-            state.selectedTab = SelectAll;
+            state.selectedTab = SELECTED_ALL;
         },
         toggleComplete(state, action: PayloadAction<string>) {
             const toggledTodo = state.list.find(todo => todo.id === action.payload);
@@ -68,7 +68,7 @@ const todoSlice = createSlice({
         },
         removeCompletedTodo(state){
             state.list = state.list.filter(todo => todo.completed === false);
-            state.selectedTab = SelectAll;
+            state.selectedTab = SELECTED_ALL;
         },
         changeTab(state, action: PayloadAction<string>){
             state.selectedTab = action.payload;

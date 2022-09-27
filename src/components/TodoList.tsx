@@ -2,7 +2,7 @@ import { useAppSelector } from '../hooks';
 import TodoItem from './TodoItem';
 import { List, Paper, Grid, ListItem, ListItemText } from '@material-ui/core';
 import AdditionalButtons from './AdditionalButtons';
-import { SelectActive, SelectCompleted } from '../constants';
+import { SELECTED_ACTIVE, SELECTED_COMPLITED } from '../constants';
 import { Typography } from '@mui/material';
 
 
@@ -12,11 +12,11 @@ const TodoList = () => {
     let showTodos;
 
     switch (showTab) {
-        case SelectActive:
-            showTodos = todos.filter(todo => todo.completed === false)
+        case SELECTED_ACTIVE:
+            showTodos = todos.filter(todo => todo.completed === false);
             break;
-        case SelectCompleted:
-            showTodos = todos.filter(todo => todo.completed === true)
+        case SELECTED_COMPLITED:
+            showTodos = todos.filter(todo => todo.completed === true);
             break;
         default:
             showTodos = todos;
