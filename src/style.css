@@ -12,3 +12,10 @@
     text-decoration:line-through;
     color:#808080
 }
+.text{
+    padding-right: 66px;
+}
+.edit_btn{
+    margin-left: 10px;
+    margin-right: 8px;
+}

@@ -9,6 +9,13 @@ type Todo = {
     expirationDate: string;
 }
 
+type EditTodo = {
+    id: string;
+    title: string;
+    creationDate: string;
+    expirationDate: string;
+}
+
 type addTodoAction = {
     title: string;
     creationDate: string;
@@ -45,10 +52,19 @@ const todoSlice = createSlice({
         },
         removeTodo(state, action: PayloadAction<string>) {
             state.list = state.list.filter(todo => todo.id !== action.payload);
+        },
+        editTodo(state, action: PayloadAction<EditTodo>){
+            const {title, creationDate, expirationDate} = action.payload;
+            const editTodo = state.list.find(todo => todo.id === action.payload.id);
+            if(editTodo){
+                editTodo.title = title;
+                editTodo.creationDate = creationDate;
+                editTodo.expirationDate = expirationDate;
+            }
         }
     },
 });
 
 
-export const { addTodo, toggleComplete, removeTodo } = todoSlice.actions;
+export const { addTodo, toggleComplete, removeTodo, editTodo } = todoSlice.actions;
 export default todoSlice.reducer;
