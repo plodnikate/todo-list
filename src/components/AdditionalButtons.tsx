@@ -1,5 +1,5 @@
 import { Button, Grid } from '@material-ui/core';
-import { FC, MouseEventHandler } from 'react';
+import { FC } from 'react';
 import { useAppDispatch } from '../hooks';
 import { changeTab, removeCompletedTodo } from '../store/todoSlice';
 import { SELECTED_ALL, SELECTED_ACTIVE, SELECTED_COMPLITED } from '../constants';
@@ -19,11 +19,15 @@ const AdditionalButtons: FC<AdditionaButtons> = ({ showTab }) => {
         dispatch(removeCompletedTodo())
     }
 
+    const getColor = (selectItems: string) => {
+        return showTab === selectItems ? 'default' : 'primary';
+    }
+
     return (
         <Grid container>
             <Grid xs={2} md={1} item>
                 <Button
-                    color={showTab === SELECTED_ALL ? 'default' : 'primary'}
+                    color={getColor(SELECTED_ALL)}
                     fullWidth
                     onClick={() => {switchTab(SELECTED_ALL)}}
                 >
@@ -32,7 +36,7 @@ const AdditionalButtons: FC<AdditionaButtons> = ({ showTab }) => {
             </Grid>
             <Grid xs={2} md={2} item>
                 <Button
-                    color={showTab === SELECTED_COMPLITED ? 'default' : 'primary'}
+                    color={getColor(SELECTED_COMPLITED)}
                     fullWidth
                     onClick={() => {switchTab(SELECTED_COMPLITED)}}>
                     Completed
@@ -40,7 +44,7 @@ const AdditionalButtons: FC<AdditionaButtons> = ({ showTab }) => {
             </Grid>
             <Grid xs={2} md={1} item>
                 <Button
-                    color={showTab === SELECTED_ACTIVE ? 'default' : 'primary'}
+                    color={getColor(SELECTED_ACTIVE)}
                     fullWidth
                     onClick={() => {switchTab(SELECTED_ACTIVE)}}>
                     Active
