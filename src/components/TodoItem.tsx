@@ -46,7 +46,10 @@ const TodoItem: FC<TodoItemProps> = ({ id, title, completed, creationDate, expir
                     </IconButton>
                 </ListItemSecondaryAction>
             </ListItem>
-            {showModal && <Modal showModal={setShowModal} title={title} id={id} creationDate={parse(creationDate, DATE_FORMAT, new Date())} expirationDate={parse(expirationDate, DATE_FORMAT, new Date())}/>}
+            {showModal && <Modal showModal={setShowModal} title={title} id={id} 
+            creationDate={parse(creationDate, DATE_FORMAT, new Date())} 
+            expirationDate={parse(expirationDate, DATE_FORMAT, new Date())}
+            />}
         </div>
     );
 };

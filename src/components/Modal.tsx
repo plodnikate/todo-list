@@ -1,4 +1,4 @@
-import { useState, FC, SyntheticEvent } from 'react';
+import { useState, FC, SyntheticEvent, ChangeEvent } from 'react';
 import { useAppDispatch } from '../hooks';
 import { format, addMinutes } from 'date-fns';
 import { addTodo, editTodo } from '../store/todoSlice';
@@ -29,13 +29,12 @@ const Modal: FC<Modal> = ({ showModal, title, setTitle, id, creationDate, expira
     const [dateCreation, setDateCreation] = useState(creationDate ? creationDate : new Date());
     const [dateExpiration, setDateExpiration] = useState(expirationDate ? expirationDate : addMinutes(dateCreation, 5));
 
-
     const minExpirationDate = format(addMinutes(dateCreation, 5), FORM_DATE_FORMAT);
 
     const handleSubmit = (e: SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        if (text.trim().length) {
+        if (text.trim()) {
             if(id){
                 dispatch(editTodo({ id: id, title: text, creationDate: format(dateCreation, DATE_FORMAT), expirationDate: format(dateExpiration, DATE_FORMAT) }));
                 showModal(false);
@@ -50,6 +49,14 @@ const Modal: FC<Modal> = ({ showModal, title, setTitle, id, creationDate, expira
 
         }
     };
+
+    const changeHandlerCreationDate = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setDateCreation(new Date(e.target.value));
+    }
+
+    const changeHandlerExpirationDate = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setDateExpiration(new Date(e.target.value));
+    }
 
     return (
         <Grid container justifyContent="center" alignItems='center'>
@@ -71,7 +78,7 @@ const Modal: FC<Modal> = ({ showModal, title, setTitle, id, creationDate, expira
                                 InputLabelProps={{
                                     shrink: true,
                                 }}
-                                onChange={(event) => { setDateCreation(new Date(event.target.value)); }}
+                                onChange={changeHandlerCreationDate}
                             />
                             <TextField
                                 required fullWidth
@@ -85,7 +92,7 @@ const Modal: FC<Modal> = ({ showModal, title, setTitle, id, creationDate, expira
                                 inputProps={{
                                     min: minExpirationDate,
                                 }}
-                                onChange={(event) => { setDateExpiration(new Date(event.target.value)) }}
+                                onChange={changeHandlerExpirationDate}
                             />
                         </Stack>
                     </DialogContent>
