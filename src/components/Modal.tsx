@@ -18,8 +18,8 @@ interface Modal {
     title: string;
     setTitle?: (title: string) => void;
     id?:string;
-    creationDate?: Date,
-    expirationDate?: Date,
+    creationDate?: Date;
+    expirationDate?: Date;
 }
 
 const Modal: FC<Modal> = ({ showModal, title, setTitle, id, creationDate, expirationDate }) => {
@@ -37,14 +37,14 @@ const Modal: FC<Modal> = ({ showModal, title, setTitle, id, creationDate, expira
 
         if (text.trim().length) {
             if(id){
-                dispatch(editTodo({ id: id, title: text, creationDate: format(dateCreation, DATE_FORMAT), expirationDate: format(dateExpiration, DATE_FORMAT) }))
+                dispatch(editTodo({ id: id, title: text, creationDate: format(dateCreation, DATE_FORMAT), expirationDate: format(dateExpiration, DATE_FORMAT) }));
                 showModal(false);
                 return;
             }
             dispatch(addTodo({ title: text, creationDate: format(dateCreation, DATE_FORMAT), expirationDate: format(dateExpiration, DATE_FORMAT) }));
             setText('');
             if (setTitle) {
-                setTitle('')
+                setTitle('');
             }
             showModal(false);
 
@@ -62,7 +62,6 @@ const Modal: FC<Modal> = ({ showModal, title, setTitle, id, creationDate, expira
                                 placeholder='new todo' value={text} fullWidth
                                 onChange={(e) => setText(e.target.value)}
                             />
-
                             <TextField
                                 required fullWidth
                                 id="datetime-local"
@@ -74,7 +73,6 @@ const Modal: FC<Modal> = ({ showModal, title, setTitle, id, creationDate, expira
                                 }}
                                 onChange={(event) => { setDateCreation(new Date(event.target.value)); }}
                             />
-
                             <TextField
                                 required fullWidth
                                 id="datetime-local"
@@ -92,8 +90,8 @@ const Modal: FC<Modal> = ({ showModal, title, setTitle, id, creationDate, expira
                         </Stack>
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={() => { showModal(false) }}>Cancel</Button>
-                        <Button type="submit">Save</Button>
+                        <Button onClick={() => { showModal(false) }}> Cancel </Button>
+                        <Button type="submit"> Save </Button>
                     </DialogActions>
                 </Stack>
             </Dialog>

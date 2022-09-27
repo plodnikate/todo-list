@@ -54,11 +54,12 @@ const todoSlice = createSlice({
             state.list = state.list.filter(todo => todo.id !== action.payload);
         },
         editTodo(state, action: PayloadAction<EditTodo>){
+            const {title, creationDate, expirationDate} = action.payload;
             const editTodo = state.list.find(todo => todo.id === action.payload.id);
             if(editTodo){
-                editTodo.title = action.payload.title;
-                editTodo.creationDate = action.payload.creationDate;
-                editTodo.expirationDate = action.payload.expirationDate
+                editTodo.title = title;
+                editTodo.creationDate = creationDate;
+                editTodo.expirationDate = expirationDate;
             }
         }
     },
