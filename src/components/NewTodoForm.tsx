@@ -36,7 +36,7 @@ const NewTodoForm: FC = () => {
                     <Grid container>
                         <Grid xs={9} md={10} item className="grid">
                             <TextField
-                                helperText={error} // error message
+                                helperText={error} 
                                 error={!!error}
                                 placeholder='new todo' value={text} fullWidth
                                 onChange={(e) => setText(e.target.value)}
