@@ -24,7 +24,7 @@ interface Modal {
 
 const Modal: FC<Modal> = ({ showModal, title, setTitle, id, creationDate, expirationDate }) => {
     const dispatch = useAppDispatch();
-
+    
     const [text, setText] = useState(title);
     const [dateCreation, setDateCreation] = useState(creationDate ? creationDate : new Date());
     const [dateExpiration, setDateExpiration] = useState(expirationDate ? expirationDate : addMinutes(dateCreation, 5));
