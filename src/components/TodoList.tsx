@@ -13,10 +13,10 @@ const TodoList = () => {
 
     switch (showTab) {
         case SELECTED_ACTIVE:
-            showTodos = todos.filter(todo => todo.completed === false);
+            showTodos = todos.filter(todo => !todo.completed);
             break;
         case SELECTED_COMPLITED:
-            showTodos = todos.filter(todo => todo.completed === true);
+            showTodos = todos.filter(todo => todo.completed);
             break;
         default:
             showTodos = todos;

@@ -53,7 +53,7 @@ const AdditionalButtons: FC<AdditionaButtons> = ({ showTab }) => {
             <Grid xs={2} md={3} item>
                 <Button color='primary'
                     fullWidth
-                    onClick={() => {removeCompletedItem()}}>
+                    onClick={removeCompletedItem}>
                     Clear completed
                 </Button>
             </Grid>

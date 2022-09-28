@@ -67,7 +67,7 @@ const todoSlice = createSlice({
             }
         },
         removeCompletedTodo(state){
-            state.list = state.list.filter(todo => todo.completed === false);
+            state.list = state.list.filter(todo => !todo.completed);
             state.selectedTab = SELECTED_ALL;
         },
         changeTab(state, action: PayloadAction<string>){
