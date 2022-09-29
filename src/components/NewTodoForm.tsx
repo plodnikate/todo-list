@@ -6,7 +6,8 @@ import { TextField, Paper, Button, Grid } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import Modal from './Modal';
 import { DATE_FORMAT } from '../constants';
-import '../style.css'
+import '../style.css';
+import SortItem from './SortItem';
 
 const NewTodoForm: FC = () => {
     const [text, setText] = useState('');
@@ -24,7 +25,8 @@ const NewTodoForm: FC = () => {
         }
         if (text.trim()) {
             const date = new Date();
-            dispatch(addTodo({ title: text, creationDate: format(date, DATE_FORMAT), expirationDate: format(addDays(date, 1), DATE_FORMAT) }));
+            dispatch(addTodo({ title: text, creationDate: format(date, DATE_FORMAT), 
+                expirationDate: format(addDays(date, 1), DATE_FORMAT) }));
             setText('');
         }
     };
@@ -34,7 +36,8 @@ const NewTodoForm: FC = () => {
             <Grid xs={12} sm={9} md={6} item >
                 <Paper className="paper">
                     <Grid container>
-                        <Grid xs={9} md={10} item className="grid">
+                    <SortItem />
+                        <Grid xs={9} md={8} item className="grid">
                             <TextField
                                 helperText={error} 
                                 error={!!error}
