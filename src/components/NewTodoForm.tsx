@@ -1,12 +1,12 @@
 import { useState, FC } from 'react';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch } from '../hooks';
 import { format, addDays } from 'date-fns';
-import { addTodo } from '../../store/todoSlice';
+import { addTodo } from '../store/todoSlice';
 import { TextField, Paper, Button, Grid } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
-import Modal from '../ModalForm/ModalForm';
-import { DATE_FORMAT } from '../../constants/constants';
-import '../Components.css';
+import Modal from './Modal';
+import { DATE_FORMAT } from '../constants';
+import '../style.css';
 import SortItem from './SortItem';
 
 const NewTodoForm: FC = () => {

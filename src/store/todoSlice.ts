@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { v4 as uuidv4 } from "uuid";
-import { SELECTED_ALL, EXP_DATE_DOWN } from '../constants/constants';
+import { SELECTED_ALL, EXP_DATE_DOWN } from '../constants';
 
 type Todo = {
     id: string;

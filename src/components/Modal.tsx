@@ -1,7 +1,7 @@
 import { useState, FC, SyntheticEvent, ChangeEvent } from 'react';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch } from '../hooks';
 import { format, addMinutes } from 'date-fns';
-import { addTodo, editTodo } from '../../store/todoSlice';
+import { addTodo, editTodo } from '../store/todoSlice';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -9,7 +9,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import Stack from '@mui/material/Stack';
 import { Grid } from '@material-ui/core';
-import { DATE_FORMAT, FORM_DATE_FORMAT } from '../../constants/constants';
+import { DATE_FORMAT, FORM_DATE_FORMAT } from '../constants';
 
 interface Modal {
     showModal: (isShowModule:boolean) => void;
@@ -26,24 +26,18 @@ const Modal: FC<Modal> = ({ showModal, title, setTitle, id, creationDate, expira
     const [text, setText] = useState(title);
     const [dateCreation, setDateCreation] = useState(creationDate ? creationDate : new Date());
     const [dateExpiration, setDateExpiration] = useState(expirationDate ? expirationDate : addMinutes(dateCreation, 5));
+
     const minExpirationDate = format(addMinutes(dateCreation, 5), FORM_DATE_FORMAT);
-
-    const changeHandleText = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setText(e.target.value);
-    }
-
     const handleSubmit = (e: SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         if (text.trim()) {
             if(id){
-                dispatch(editTodo({ id: id, title: text, creationDate: format(dateCreation, DATE_FORMAT), 
-                    expirationDate: format(dateExpiration, DATE_FORMAT) }));
+                dispatch(editTodo({ id: id, title: text, creationDate: format(dateCreation, DATE_FORMAT), expirationDate: format(dateExpiration, DATE_FORMAT) }));
                 showModal(false);
                 return;
             }
-            dispatch(addTodo({ title: text, creationDate: format(dateCreation, DATE_FORMAT), 
-                expirationDate: format(dateExpiration, DATE_FORMAT) }));
+            dispatch(addTodo({ title: text, creationDate: format(dateCreation, DATE_FORMAT), expirationDate: format(dateExpiration, DATE_FORMAT) }));
             setText('');
             if (setTitle) {
                 setTitle('');
@@ -70,7 +64,7 @@ const Modal: FC<Modal> = ({ showModal, title, setTitle, id, creationDate, expira
                             <TextField
                                 required
                                 placeholder='new todo' value={text} fullWidth
-                                onChange={changeHandleText}
+                                onChange={(e) => setText(e.target.value)}
                             />
                             <TextField
                                 required fullWidth

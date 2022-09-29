@@ -1,8 +1,8 @@
 import { Button, Grid } from '@material-ui/core';
 import { FC } from 'react';
-import { useAppDispatch } from '../../../hooks';
-import { changeTab, removeCompletedTodo } from '../../../store/todoSlice';
-import { SELECTED_ALL, SELECTED_ACTIVE, SELECTED_COMPLITED } from '../../../constants/constants';
+import { useAppDispatch } from '../hooks';
+import { changeTab, removeCompletedTodo } from '../store/todoSlice';
+import { SELECTED_ALL, SELECTED_ACTIVE, SELECTED_COMPLITED } from '../constants';
 
 interface AdditionaButtons {
     showTab: string;

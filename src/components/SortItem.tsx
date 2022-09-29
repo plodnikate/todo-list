@@ -1,8 +1,8 @@
 import { Grid, MenuItem, FormHelperText } from '@material-ui/core';
 import FormControl from '@mui/material/FormControl';
-import { TEXT_UP, TEXT_DOWN, EXP_DATE_UP, EXP_DATE_DOWN } from '../../constants/constants';
-import { useAppDispatch } from '../../hooks';
-import { sortBy } from '../../store/todoSlice';
+import { TEXT_UP, TEXT_DOWN, EXP_DATE_UP, EXP_DATE_DOWN } from '../constants';
+import { useAppDispatch } from '../hooks';
+import { sortBy } from '../store/todoSlice';
 import { useState } from 'react';
 import { Select, SelectChangeEvent } from "@mui/material";
 
