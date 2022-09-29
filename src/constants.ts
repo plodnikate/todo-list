@@ -3,3 +3,7 @@ export const FORM_DATE_FORMAT:string = "yyyy-MM-dd'T'HH:mm";
 export const SELECTED_ALL:string = 'all';
 export const SELECTED_ACTIVE:string = 'active';
 export const SELECTED_COMPLITED:string = 'completed';
+export const TEXT_UP:string = 'text_up';
+export const TEXT_DOWN:string = 'text_down';
+export const EXP_DATE_UP:string = 'exp_text_up';
+export const EXP_DATE_DOWN:string = 'exp_text_down';

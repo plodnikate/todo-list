@@ -12,16 +12,16 @@ const AdditionalButtons: FC<AdditionaButtons> = ({ showTab }) => {
     const dispatch = useAppDispatch();
 
     const switchTab = (selectItems: string) => {
-        dispatch(changeTab(selectItems))
+        dispatch(changeTab(selectItems));
     };
 
     const removeCompletedItem = () => {
-        dispatch(removeCompletedTodo())
-    }
+        dispatch(removeCompletedTodo());
+    };
 
     const getColor = (selectItems: string) => {
         return showTab === selectItems ? 'default' : 'primary';
-    }
+    };
 
     return (
         <Grid container>
@@ -29,7 +29,7 @@ const AdditionalButtons: FC<AdditionaButtons> = ({ showTab }) => {
                 <Button
                     color={getColor(SELECTED_ALL)}
                     fullWidth
-                    onClick={() => {switchTab(SELECTED_ALL)}}
+                    onClick={() => { switchTab(SELECTED_ALL) }}
                 >
                     All
                 </Button>
@@ -38,7 +38,8 @@ const AdditionalButtons: FC<AdditionaButtons> = ({ showTab }) => {
                 <Button
                     color={getColor(SELECTED_COMPLITED)}
                     fullWidth
-                    onClick={() => {switchTab(SELECTED_COMPLITED)}}>
+                    onClick={() => { switchTab(SELECTED_COMPLITED) }}
+                >
                     Completed
                 </Button>
             </Grid>
@@ -46,14 +47,16 @@ const AdditionalButtons: FC<AdditionaButtons> = ({ showTab }) => {
                 <Button
                     color={getColor(SELECTED_ACTIVE)}
                     fullWidth
-                    onClick={() => {switchTab(SELECTED_ACTIVE)}}>
+                    onClick={() => { switchTab(SELECTED_ACTIVE) }}>
+
                     Active
                 </Button>
             </Grid>
             <Grid xs={2} md={3} item>
                 <Button color='primary'
                     fullWidth
-                    onClick={removeCompletedItem}>
+                    onClick={removeCompletedItem}
+                >
                     Clear completed
                 </Button>
             </Grid>

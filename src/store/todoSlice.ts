@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { v4 as uuidv4 } from "uuid";
-import { SELECTED_ALL } from '../constants'
+import { SELECTED_ALL, EXP_DATE_DOWN } from '../constants';
 
 type Todo = {
     id: string;
@@ -25,12 +25,14 @@ type addTodoAction = {
 
 type TodosState = {
     list: Todo[],
-    selectedTab: string
+    selectedTab: string,
+    sortBy:string
 }
 
 const initialState: TodosState = {
     list: [],
-    selectedTab: SELECTED_ALL
+    selectedTab: SELECTED_ALL,
+    sortBy: EXP_DATE_DOWN
 }
 
 const todoSlice = createSlice({
@@ -72,10 +74,13 @@ const todoSlice = createSlice({
         },
         changeTab(state, action: PayloadAction<string>){
             state.selectedTab = action.payload;
+        },
+        sortBy(state, action: PayloadAction<string>){
+            state.sortBy = action.payload;
         }
     },
 });
 
 
-export const { addTodo, toggleComplete, removeTodo, editTodo, removeCompletedTodo, changeTab } = todoSlice.actions;
+export const { addTodo, toggleComplete, removeTodo, editTodo, removeCompletedTodo, changeTab, sortBy } = todoSlice.actions;
 export default todoSlice.reducer;
