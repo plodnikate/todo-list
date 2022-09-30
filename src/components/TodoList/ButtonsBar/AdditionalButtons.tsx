@@ -1,8 +1,8 @@
 import { Button, Grid } from '@material-ui/core';
 import { FC } from 'react';
-import { useAppDispatch } from '../hooks';
-import { changeTab, removeCompletedTodo } from '../store/todoSlice';
-import { SELECTED_ALL, SELECTED_ACTIVE, SELECTED_COMPLITED } from '../constants';
+import { useAppDispatch } from '../../../hooks';
+import { changeTab, removeCompletedTodo } from '../../../store/todoSlice';
+import { SELECTED_ALL, SELECTED_ACTIVE, SELECTED_COMPLITED } from '../../../constants/constants';
 
 interface AdditionaButtons {
     showTab: string;
@@ -29,7 +29,7 @@ const AdditionalButtons: FC<AdditionaButtons> = ({ showTab }) => {
                 <Button
                     color={getColor(SELECTED_ALL)}
                     fullWidth
-                    onClick={() => { switchTab(SELECTED_ALL) }}
+                    onClick={() => {switchTab(SELECTED_ALL)}}
                 >
                     All
                 </Button>
@@ -38,7 +38,7 @@ const AdditionalButtons: FC<AdditionaButtons> = ({ showTab }) => {
                 <Button
                     color={getColor(SELECTED_COMPLITED)}
                     fullWidth
-                    onClick={() => { switchTab(SELECTED_COMPLITED) }}
+                    onClick={() => {switchTab(SELECTED_COMPLITED)}}
                 >
                     Completed
                 </Button>
@@ -47,7 +47,7 @@ const AdditionalButtons: FC<AdditionaButtons> = ({ showTab }) => {
                 <Button
                     color={getColor(SELECTED_ACTIVE)}
                     fullWidth
-                    onClick={() => { switchTab(SELECTED_ACTIVE) }}>
+                    onClick={() => {switchTab(SELECTED_ACTIVE)}}>
 
                     Active
                 </Button>

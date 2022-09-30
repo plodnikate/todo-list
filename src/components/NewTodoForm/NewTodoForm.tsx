@@ -1,26 +1,31 @@
-import { useState, FC } from 'react';
-import { useAppDispatch } from '../hooks';
+import { useState, FC, KeyboardEvent, ChangeEvent } from 'react';
+import { useAppDispatch } from '../../hooks';
 import { format, addDays } from 'date-fns';
-import { addTodo } from '../store/todoSlice';
+import { addTodo } from '../../store/todoSlice';
 import { TextField, Paper, Button, Grid } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
-import Modal from './Modal';
-import { DATE_FORMAT } from '../constants';
-import '../style.css';
+import Modal from '../ModalForm/ModalForm';
+import { DATE_FORMAT, SPECIAL_SYMBOLS_REGEX } from '../../constants/constants';
+import '../Components.css';
 import SortItem from './SortItem';
 
 const NewTodoForm: FC = () => {
     const [text, setText] = useState('');
     const [showModal, setShowModal] = useState(false);
-    const dispatch = useAppDispatch();
     const [error, setError] = useState("");
+    const dispatch = useAppDispatch();
 
-
-    const handleKeyPress = () => {
-        if (!text.match(/[@#~^`!-+()_|?{}[\]&*%<>\\$'"]/)) {
+    const hangeTextHandler = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        if (!e.target.value.match(SPECIAL_SYMBOLS_REGEX)) {
             setError("");
         } else {
             setError("no special symbols allowed");
+        }
+        setText(e.target.value);
+    }
+    
+    const handleKeyPress = (event: KeyboardEvent) => {
+        if (event.key !== 'Enter' || error) {
             return;
         }
         if (text.trim()) {
@@ -42,12 +47,8 @@ const NewTodoForm: FC = () => {
                                 helperText={error} 
                                 error={!!error}
                                 placeholder='new todo' value={text} fullWidth
-                                onChange={(e) => setText(e.target.value)}
-                                onKeyPress={event => {
-                                    if (event.key === 'Enter') {
-                                        handleKeyPress()
-                                    }
-                                }}
+                                onChange={hangeTextHandler}
+                                onKeyPress={ handleKeyPress }
                             />
                         </Grid>
                         <Grid xs={2} md={1} item>

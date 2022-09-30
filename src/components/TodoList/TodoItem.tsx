@@ -1,12 +1,12 @@
-import { useAppDispatch } from '../hooks';
-import { toggleComplete, removeTodo } from '../store/todoSlice';
+import { useAppDispatch } from '../../hooks';
+import { toggleComplete, removeTodo } from '../../store/todoSlice';
 import { ListItem, Checkbox, IconButton, ListItemText, ListItemSecondaryAction } from '@material-ui/core';
 import DeleteOutlined from '@material-ui/icons/DeleteOutlined';
 import Edit from '@material-ui/icons/Edit';
 import { useState,  FC } from 'react';
-import Modal from './Modal';
+import Modal from '../ModalForm/ModalForm';
 import { parse } from 'date-fns';
-import { DATE_FORMAT } from '../constants';
+import { DATE_FORMAT } from '../../constants/constants';
 
 
 interface TodoItemProps {
@@ -21,12 +21,23 @@ const TodoItem: FC<TodoItemProps> = ({ id, title, completed, creationDate, expir
     const dispatch = useAppDispatch();
     const [showModal, setShowModal] = useState(false);
 
+    const onChangeHandler = () => {
+        dispatch(toggleComplete(id))
+    }
+    const onClickEditButtonHanlder = () =>{
+        setShowModal(true);
+    }
+
+    const onClickDeleteButtonHanlder = () =>{
+        dispatch(removeTodo(id));
+    }
+
     return (
         <div>
             <ListItem divider>
                 <Checkbox color="primary"
                     checked={completed}
-                    onChange={() => dispatch(toggleComplete(id))}
+                    onChange={onChangeHandler}
                 />
                 <ListItemText
                     primaryTypographyProps={{
@@ -38,10 +49,10 @@ const TodoItem: FC<TodoItemProps> = ({ id, title, completed, creationDate, expir
                     secondary={`${creationDate} - ${expirationDate}`} className={(completed ? "done_item " : "") + "text"}
                 />
                 <ListItemSecondaryAction>
-                    <IconButton aria-label="Delete Todo" onClick={() => setShowModal(true)}>
+                    <IconButton aria-label="Delete Todo" onClick={onClickEditButtonHanlder}>
                         <Edit />
                     </IconButton>
-                    <IconButton aria-label="Delete Todo" onClick={() => dispatch(removeTodo(id))}>
+                    <IconButton aria-label="Delete Todo" onClick={onClickDeleteButtonHanlder}>
                         <DeleteOutlined />
                     </IconButton>
                 </ListItemSecondaryAction>
