@@ -1,12 +1,12 @@
-import { useAppDispatch } from '../hooks';
-import { toggleComplete, removeTodo } from '../store/todoSlice';
+import { useAppDispatch } from '../../hooks';
+import { toggleComplete, removeTodo } from '../../store/todoSlice';
 import { ListItem, Checkbox, IconButton, ListItemText, ListItemSecondaryAction } from '@material-ui/core';
 import DeleteOutlined from '@material-ui/icons/DeleteOutlined';
 import Edit from '@material-ui/icons/Edit';
 import { useState,  FC } from 'react';
-import Modal from './Modal';
+import Modal from '../ModalForm/ModalForm';
 import { parse } from 'date-fns';
-import { DATE_FORMAT } from '../constants';
+import { DATE_FORMAT } from '../../constants/constants';
 
 
 interface TodoItemProps {
