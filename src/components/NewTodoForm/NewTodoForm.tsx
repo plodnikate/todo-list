@@ -1,4 +1,4 @@
-import { useState, FC, KeyboardEvent } from 'react';
+import { useState, FC, KeyboardEvent, ChangeEvent } from 'react';
 import { useAppDispatch } from '../../hooks';
 import { format, addDays } from 'date-fns';
 import { addTodo } from '../../store/todoSlice';
@@ -14,15 +14,18 @@ const NewTodoForm: FC = () => {
     const [showModal, setShowModal] = useState(false);
     const [error, setError] = useState("");
     const dispatch = useAppDispatch();
-    
-    const handleKeyPress = (event: KeyboardEvent) => {
-        if (event.key !== 'Enter') {
-            return;
-        }
-        if (!text.match(SPECIAL_SYMBOLS_REGEX)) {
+
+    const hangeTextHandler = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        if (!e.target.value.match(SPECIAL_SYMBOLS_REGEX)) {
             setError("");
         } else {
             setError("no special symbols allowed");
+        }
+        setText(e.target.value);
+    }
+    
+    const handleKeyPress = (event: KeyboardEvent) => {
+        if (event.key !== 'Enter' || error) {
             return;
         }
         if (text.trim()) {
@@ -44,7 +47,7 @@ const NewTodoForm: FC = () => {
                                 helperText={error} 
                                 error={!!error}
                                 placeholder='new todo' value={text} fullWidth
-                                onChange={(e) => setText(e.target.value)}
+                                onChange={hangeTextHandler}
                                 onKeyPress={ handleKeyPress }
                             />
                         </Grid>
