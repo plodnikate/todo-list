@@ -5,7 +5,7 @@ import { addTodo } from '../../store/todoSlice';
 import { TextField, Paper, Button, Grid } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import Modal from '../ModalForm/ModalForm';
-import { DATE_FORMAT } from '../../constants/constants';
+import { DATE_FORMAT, SPECIAL_SYMBOLS_REGEX } from '../../constants/constants';
 import '../Components.css';
 import SortItem from './SortItem';
 
@@ -19,7 +19,7 @@ const NewTodoForm: FC = () => {
         if (event.key !== 'Enter') {
             return;
         }
-        if (!text.match(/[@#~^`!-+()_|?{}[\]&*%<>\\$'"]/)) {
+        if (!text.match(SPECIAL_SYMBOLS_REGEX)) {
             setError("");
         } else {
             setError("no special symbols allowed");

@@ -7,3 +7,4 @@ export const TEXT_UP:string = 'text_up';
 export const TEXT_DOWN:string = 'text_down';
 export const EXP_DATE_UP:string = 'exp_text_up';
 export const EXP_DATE_DOWN:string = 'exp_text_down';
+export const SPECIAL_SYMBOLS_REGEX = /[@#~^`!-+()_|?{}[\]&*%<>\\$'"]/;
