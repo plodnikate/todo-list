@@ -27,27 +27,27 @@ const AdditionalButtons: FC<AdditionaButtons> = ({ showTab }) => {
         <Grid container>
             <Grid xs={2} md={1} item>
                 <Button
-                    color={ getColor(SELECTED_ALL) }
+                    color={getColor(SELECTED_ALL)}
                     fullWidth
-                    onClick={() => { switchTab(SELECTED_ALL) }}
+                    onClick={() => {switchTab(SELECTED_ALL)}}
                 >
                     All
                 </Button>
             </Grid>
             <Grid xs={2} md={2} item>
                 <Button
-                    color={ getColor(SELECTED_COMPLITED) }
+                    color={getColor(SELECTED_COMPLITED)}
                     fullWidth
-                    onClick={() => { switchTab(SELECTED_COMPLITED) }}
+                    onClick={() => {switchTab(SELECTED_COMPLITED)}}
                 >
                     Completed
                 </Button>
             </Grid>
             <Grid xs={2} md={1} item>
                 <Button
-                    color={ getColor(SELECTED_ACTIVE) }
+                    color={getColor(SELECTED_ACTIVE)}
                     fullWidth
-                    onClick={() => { switchTab(SELECTED_ACTIVE) }}>
+                    onClick={() => {switchTab(SELECTED_ACTIVE)}}>
 
                     Active
                 </Button>
@@ -55,7 +55,7 @@ const AdditionalButtons: FC<AdditionaButtons> = ({ showTab }) => {
             <Grid xs={2} md={3} item>
                 <Button color='primary'
                     fullWidth
-                    onClick={ removeCompletedItem }
+                    onClick={removeCompletedItem}
                 >
                     Clear completed
                 </Button>

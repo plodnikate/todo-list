@@ -14,7 +14,6 @@ const TodoList = () => {
     const sortBy = useAppSelector(state => state.todos.sortBy);
     const [searchText, setSearchText] = useState('');
     let showTodos;
-    
     const searchTextHandler = (text: string) => {
         setSearchText(text);
     }
@@ -48,11 +47,11 @@ const TodoList = () => {
         default:
             showTodos = showTodos;
     }
-
+    
     if (searchText.length) {
-        showTodos = showTodos.filter(todo => todo.title.includes(searchText));
+        showTodos = showTodos.filter(todo => todo.title.toLocaleLowerCase().includes(searchText.trim().toLocaleLowerCase()));
     }
-
+   
     return (
         <Grid container justifyContent="center">
             <Grid xs={12} sm={9} md={6} item>
