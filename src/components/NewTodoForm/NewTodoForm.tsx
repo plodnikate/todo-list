@@ -1,4 +1,4 @@
-import { useState, FC } from 'react';
+import { useState, FC, KeyboardEvent } from 'react';
 import { useAppDispatch } from '../../hooks';
 import { format, addDays } from 'date-fns';
 import { addTodo } from '../../store/todoSlice';
@@ -12,11 +12,13 @@ import SortItem from './SortItem';
 const NewTodoForm: FC = () => {
     const [text, setText] = useState('');
     const [showModal, setShowModal] = useState(false);
-    const dispatch = useAppDispatch();
     const [error, setError] = useState("");
-
-
-    const handleKeyPress = () => {
+    const dispatch = useAppDispatch();
+    
+    const handleKeyPress = (event: KeyboardEvent) => {
+        if (event.key !== 'Enter') {
+            return;
+        }
         if (!text.match(/[@#~^`!-+()_|?{}[\]&*%<>\\$'"]/)) {
             setError("");
         } else {
@@ -43,11 +45,7 @@ const NewTodoForm: FC = () => {
                                 error={!!error}
                                 placeholder='new todo' value={text} fullWidth
                                 onChange={(e) => setText(e.target.value)}
-                                onKeyPress={event => {
-                                    if (event.key === 'Enter') {
-                                        handleKeyPress()
-                                    }
-                                }}
+                                onKeyPress={ handleKeyPress }
                             />
                         </Grid>
                         <Grid xs={2} md={1} item>
