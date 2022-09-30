@@ -14,6 +14,7 @@ const TodoList = () => {
     const sortBy = useAppSelector(state => state.todos.sortBy);
     const [searchText, setSearchText] = useState('');
     let showTodos;
+    
     const searchTextHandler = (text: string) => {
         setSearchText(text);
     }
@@ -47,6 +48,7 @@ const TodoList = () => {
         default:
             showTodos = showTodos;
     }
+
     if (searchText.length) {
         showTodos = showTodos.filter(todo => todo.title.includes(searchText));
     }

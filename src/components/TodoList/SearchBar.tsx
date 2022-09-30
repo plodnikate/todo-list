@@ -14,7 +14,7 @@ const SearchBar: FC<SearchBar> = ({ searchText, setText }) => {
     }
 
     return (
-        <Grid xs={12} md={12} container className="grid search_bar">
+        <Grid item xs={12} md={12} container className="grid search_bar">
             <TextField variant="standard"
                 value={searchText} fullWidth
                 onChange={hangeSearchTextHandler}
